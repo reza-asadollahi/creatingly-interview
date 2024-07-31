@@ -1,0 +1,11 @@
+{
+  "name": "creatingly-interview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run-all": "npm run start --prefix backend & npm run start --prefix frontend"
+  },
+  "author": "",
+  "license": "ISC"
+}

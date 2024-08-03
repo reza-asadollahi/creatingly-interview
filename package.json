@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run-all": "npm run start --prefix backend & npm run start --prefix frontend"
+    "start": "npm run start --prefix backend & npm run start --prefix frontend"
   },
   "author": "",
   "license": "ISC"

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from "rxjs";
+import { UserService } from "../../auth/services/user.service";
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,13 @@ import { Observable } from "rxjs";
 })
 export class HeaderComponent {
   logoSrc: string = "/assets/images/logo.png";
-  userInfo!: Observable<UserModel>;
+  userInfo: Observable<UserModel | null>;
 
-  constructor() {
+  constructor(private userService: UserService) {
+    this.userInfo = this.userService.userInfo$
   }
 
+  logout() {
+    this.userService.logout()
+  }
 }

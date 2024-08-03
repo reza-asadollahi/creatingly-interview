@@ -3,12 +3,24 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LayoutComponent } from "./layout.component";
 import { RouterModule, Routes } from "@angular/router";
 import { HeaderComponent } from './header/header.component';
+import { authGuardCanActivateChildFN, authGuardCanActivateFN } from "../auth/services/auth-guard.service";
+import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
 
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: LayoutComponent,
     children: [
-      { path: '', loadChildren: () => import("../modules/modules.module").then(m => m.ModulesModule)}
+      {
+        path: 'auth',
+        loadChildren: () => import("../auth/auth.module").then(m => m.AuthModule)
+      },
+      {
+        path: '',
+        // canActivate: [authGuardCanActivateFN],
+        // canActivateChild: [authGuardCanActivateChildFN],
+        loadChildren: () => import("../modules/modules.module").then(m => m.ModulesModule)
+      },
     ]
   }
 ];
@@ -21,7 +33,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

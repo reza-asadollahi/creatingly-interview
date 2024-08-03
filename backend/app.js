@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const http = require('http');
 const { Server } = require('socket.io');
 const projectRoutes = require('./routes/projectRoutes');
@@ -14,6 +15,9 @@ const io = new Server(server, {
   },
 });
 
+app.use(cors({
+  origin: ["http://localhost:4200"]
+}));
 app.use(express.json());
 app.use('/api/projects', authMiddleware, projectRoutes);
 app.use('/api/users', userRoutes);

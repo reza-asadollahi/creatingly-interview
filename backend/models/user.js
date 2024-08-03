@@ -14,8 +14,12 @@ function getAllUsers() {
 }
 
 function getUserById(id) {
-  return ALL_USERS.find(project => project.id === id);
+  return ALL_USERS.find(user => user.id === id);
+}
+
+function getUserByName(username) {
+  return ALL_USERS.find(user => user.name === username);
 }
 
 
-module.exports = {createUser, getUserById, getAllUsers};
+module.exports = {createUser, getUserById, getAllUsers, getUserByName};

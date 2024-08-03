@@ -1,1 +1,7 @@
-<p>page-builder works!</p>
+<div (mousemove)="onMouseMove($event)" style="height: 100vh;">
+  <div *ngFor="let user of mousePositions | keyvalue">
+    <div [ngStyle]="{'position': 'absolute', 'top.px': user.value.y, 'left.px': user.value.x}">
+      {{ user.key }}
+    </div>
+  </div>
+</div>

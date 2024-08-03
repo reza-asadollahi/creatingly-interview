@@ -6,7 +6,7 @@ import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   { path: 'projects',  loadChildren: () => import("./projects/projects.module").then(m => m.ProjectsModule)},
-  { path: 'page-builder', loadChildren: () => import("./page-builder/page-builder.module").then(m => m.PageBuilderModule)},
+  { path: 'page-builder/:projectId', loadChildren: () => import("./page-builder/page-builder.module").then(m => m.PageBuilderModule)},
   { path: '**', redirectTo: 'projects'}
 ];
 

@@ -8,6 +8,7 @@ import { ProjectService } from './project.service';
 })
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
+  newProjectName: string = "";
 
   constructor(private projectService: ProjectService) { }
 
@@ -20,6 +21,7 @@ export class ProjectsComponent implements OnInit {
   createProject(name: string) {
     this.projectService.create({ name }).subscribe((project: any) => {
       this.projects.push(project);
+      this.newProjectName = ""
     });
   }
 

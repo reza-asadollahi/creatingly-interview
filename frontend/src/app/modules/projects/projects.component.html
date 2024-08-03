@@ -1,1 +1,32 @@
-<p>projects works!</p>
+<div class="row p-5">
+  <div class="col-md-3 py-3" *ngFor="let porject of projects">
+    <div class="border rounded-3 p-3">
+      <h3>{{ porject.name }}</h3>
+      <hr>
+      <a routerLink="/page-builder/{{porject.id}}" class="btn btn-outline-primary w-100">
+        Join and Edit
+      </a>
+    </div>
+  </div>
+</div>
+
+<form class="row p-4 border-top">
+  <div class="col-md-6">
+    <mat-form-field class="w-100">
+      <mat-label>Project Name</mat-label>
+      <input matInput name="newProjectName" [(ngModel)]="newProjectName" required>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4">
+    <button type="submit"
+            (click)="createProject(newProjectName)"
+            [disabled]="!newProjectName"
+            class="btn btn-primary">
+      Create Project
+    </button>
+  </div>
+</form>
+
+
+

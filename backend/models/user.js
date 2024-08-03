@@ -1,8 +1,17 @@
 const ALL_USERS = [];
 const { v4: uuidV4 } = require('uuid');
 
+const USER_COLORS = [
+    'purple',
+    'blue',
+    'cyan',
+    'green',
+    'orange',
+    'red',
+]
+
 function createUser(name, color) {
-  const user = { id: uuidV4(), name, color };
+  const user = { id: uuidV4(), name, color: color || USER_COLORS[ALL_USERS.length % USER_COLORS.length] };
   ALL_USERS.push(user);
   return user;
 }

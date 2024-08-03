@@ -1,0 +1,18 @@
+<div id="header-section">
+  <div class="user-info">
+    @if (userInfo | async) {
+      <div class="avatar bg-{{(userInfo | async)?.color}}">{{(userInfo | async)?.name?.[0]}}</div>
+      <div class="name">{{(userInfo | async)?.name}}</div>
+    }
+  </div>
+  <div>
+    <img [ngSrc]="logoSrc" width="100" height="40" alt="">
+  </div>
+  <div class="p-2">
+    @if (userInfo | async) {
+      <a class="link-light text-decoration-none" routerLink="/projects">Projects</a>
+    } @else {
+      <a class="link-light text-decoration-none" routerLink="/auth">Sign In</a>
+    }
+  </div>
+</div>

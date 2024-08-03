@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LayoutComponent } from "./layout.component";
 import { RouterModule, Routes } from "@angular/router";
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: '',
@@ -14,11 +15,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    LayoutComponent
+    LayoutComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgOptimizedImage
   ]
 })
 export class LayoutModule { }

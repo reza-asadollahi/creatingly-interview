@@ -1,0 +1,96 @@
+///////////////////     Variables     ///////////////////
+:root {
+  --main-theme-purple: #9c27b0;
+  --main-theme-purple-d: #7b1fa2;
+  --main-theme-purple-l: #ede7f6;
+
+  --main-theme-blue: #2196f3;
+  --main-theme-blue-d: #1976d2;
+  --main-theme-blue-l: #e1f5fe;
+
+  --main-theme-cyan: #00bcd4;
+  --main-theme-cyan-d: #0097a7;
+  --main-theme-cyan-l: #e0f7fa;
+
+  --main-theme-indigo: #3f51b5;
+  --main-theme-indigo-d: #303f9f;
+  --main-theme-indigo-l: #e8eaf6;
+
+  --main-theme-orange: #ff9800;
+  --main-theme-orange-d: #f57c00;
+  --main-theme-orange-l: #fff3e0;
+
+  --main-theme-yellow: #ffeb3b;
+  --main-theme-yellow-d: #fbc02d;
+  --main-theme-yellow-l: #fffde7;
+
+  --main-theme-red: #f44336;
+  --main-theme-red-d: #d32f2f;
+  --main-theme-red-l: #ffebee;
+
+  --main-theme-pink: #e91e63;
+  --main-theme-pink-d: #c2185b;
+  --main-theme-pink-l: #fce4ec;
+
+  --main-theme-green: #4caf50;
+  --main-theme-green-d: #388e3c;
+  --main-theme-green-l: #e8f5e9;
+
+  --main-theme-lemon: #cddc39;
+  --main-theme-lemon-d: #afb42b;
+  --main-theme-lemon-l: #f9fbe7;
+
+  --main-theme-brown: #795548;
+  --main-theme-brown-d: #5d4037;
+  --main-theme-brown-l: #efebe9;
+
+  --main-theme-gray: #607D8B;
+  --main-theme-gray-d: #455A64;
+  --main-theme-gray-l: #fafafa;
+}
+
+///////////////////    Color Classes  ///////////////////
+
+// @formatter:off
+.text-purple { color: var(--main-theme-purple) !important;}
+.text-blue { color: var(--main-theme-blue) !important;}
+.text-cyan { color: var(--main-theme-cyan) !important;}
+.text-indigo { color: var(--main-theme-indigo) !important;}
+.text-orange { color: var(--main-theme-orange) !important;}
+.text-yellow { color: var(--main-theme-yellow) !important;}
+.text-red { color: var(--main-theme-red) !important;}
+.text-pink { color: var(--main-theme-pink) !important;}
+.text-green { color: var(--main-theme-green) !important;}
+.text-lemon { color: var(--main-theme-lemon) !important;}
+.text-brown { color: var(--main-theme-brown) !important;}
+.text-gray { color: var(--main-theme-gray) !important;}
+
+
+.bg-purple { background-color: var(--main-theme-purple) !important; }
+.bg-blue { background-color: var(--main-theme-blue) !important; }
+.bg-cyan { background-color: var(--main-theme-cyan) !important; }
+.bg-indigo { background-color: var(--main-theme-indigo) !important; }
+.bg-orange { background-color: var(--main-theme-orange) !important; }
+.bg-yellow { background-color: var(--main-theme-yellow) !important; }
+.bg-red { background-color: var(--main-theme-red) !important; }
+.bg-pink { background-color: var(--main-theme-pink) !important; }
+.bg-green { background-color: var(--main-theme-green) !important; }
+.bg-lemon { background-color: var(--main-theme-lemon) !important; }
+.bg-brown { background-color: var(--main-theme-brown) !important; }
+.bg-gray { background-color: var(--main-theme-gray) !important; }
+
+
+.br-purple { border-color: var(--main-theme-purple) !important; }
+.br-blue { border-color: var(--main-theme-blue) !important; }
+.br-cyan { border-color:var(--main-theme-cyan) !important; }
+.br-indigo { border-color:  var(--main-theme-indigo) !important; }
+.br-orange { border-color: var(--main-theme-orange) !important; }
+.br-yellow { border-color: var(--main-theme-yellow) !important; }
+.br-red { border-color:  var(--main-theme-red) !important; }
+.br-pink { border-color:  var(--main-theme-pink) !important; }
+.br-green { border-color:  var(--main-theme-green) !important; }
+.br-lemon { border-color:  var(--main-theme-lemon) !important; }
+.br-brown { border-color:  var(--main-theme-brown) !important; }
+.br-gray { border-color: var(--main-theme-gray) !important; }
+// @formatter:on
+

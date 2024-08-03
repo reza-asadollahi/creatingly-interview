@@ -1,0 +1,46 @@
+#header-section {
+  background-color: #3C16A2;
+  position: absolute;
+  overflow: hidden;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header-section:before {
+  content: '';
+  position: absolute;
+  top: -146%;
+  left: -18%;
+  width: 44%;
+  height: 257%;
+  transform: rotate(54deg);
+  background-color: rgb(56, 20, 152);
+  z-index: -10;
+}
+
+#header-section:after {
+  position: absolute;
+  content: '';
+  background-color: rgb(56, 20, 152);
+  top: -24%;
+  right: 4%;
+  width: 26%;
+  height: 264%;
+  transform: rotate(44deg);
+  z-index: -10;
+}
+
+.user-info {
+  .avatar {
+    width: 90%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    color: white;
+  }
+}

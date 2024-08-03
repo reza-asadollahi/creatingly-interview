@@ -1,17 +1,10 @@
 const ALL_USERS = [];
-const { v4: uuidV4 } = require('uuid');
+const {v4: uuidV4} = require('uuid');
 
-const USER_COLORS = [
-    'purple',
-    'blue',
-    'cyan',
-    'green',
-    'orange',
-    'red',
-]
+const USER_COLORS = ["purple", "blue", "cyan", "indigo", "orange", "yellow", "red", "pink", "green", "lemon", "brown", "gray"]
 
 function createUser(name, color) {
-  const user = { id: uuidV4(), name, color: color || USER_COLORS[ALL_USERS.length % USER_COLORS.length] };
+  const user = {id: uuidV4(), name, color: color || USER_COLORS[ALL_USERS.length % USER_COLORS.length]};
   ALL_USERS.push(user);
   return user;
 }
@@ -25,4 +18,4 @@ function getUserById(id) {
 }
 
 
-module.exports = { createUser, getUserById, getAllUsers};
+module.exports = {createUser, getUserById, getAllUsers};

@@ -5,7 +5,11 @@ exports.getUsers = (req, res) => {
 };
 
 exports.getUserInfo = (req, res) => {
-  res.json(getUserById(req.params.id));
+  const user = getUserById(req.params.id)
+  if(user)
+    res.json(user);
+  else
+    res.status(404).json({ message: 'User not found' });
 };
 
 exports.loginOrSignupUser = (req, res) => {

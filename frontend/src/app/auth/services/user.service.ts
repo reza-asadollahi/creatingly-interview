@@ -9,12 +9,12 @@ import { environment } from "../../../environments/environment";
 export class UserService {
   private http: HttpClient = inject(HttpClient)
   private readonly API_URL = `${environment.BASE_URL_API}/users`
-  private _userInfo$: BehaviorSubject<UserModel | null>  = new BehaviorSubject<UserModel | null>(null);
+  private _userInfo$: BehaviorSubject<UserModel | null> = new BehaviorSubject<UserModel | null>(null);
 
   constructor(private router: Router,
               private tokenService: AuthTokenService) {
-    if(this.tokenService.token){
-      console.log(this.tokenService.token)
+    if (this.tokenService.token) {
+      // console.log(this.tokenService.token)
       this.fetchUserInfo(this.tokenService.token)
     }
   }
@@ -31,8 +31,15 @@ export class UserService {
   }
 
   fetchUserInfo(userId: string) {
-    this.http.get<UserModel>(`${this.API_URL}/${userId}`).subscribe(res => {
-      this._userInfo$.next(res)
+    this.http.get<UserModel>(`${this.API_URL}/${userId}`).subscribe({
+      next: res => {
+        this._userInfo$.next(res)
+      },
+      error: err => {
+        console.warn(err)
+        this._userInfo$.next(null)
+        this.router.navigate(['auth'])
+      }
     })
   }
 

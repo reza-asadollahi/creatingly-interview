@@ -6,7 +6,7 @@ This project include
 
 ## Development server
 
-Run `npm run install` to install all the dependencies, then run `npm run watch` for running development server on both frontend and backend
+first install all the dependencies, then run `npm run watch` for running development server on both frontend and backend.
 
 ## Running unit tests
 

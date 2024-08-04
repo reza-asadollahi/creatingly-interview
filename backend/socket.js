@@ -1,10 +1,14 @@
 const { getProjectById, userJoinsProject, userLeftProject, userMoveMouse } = require('./models/project');
 const { getUserById } = require("./models/user");
+const projectElementSocket = require("./controllers/projectElementSocket");
+
 
 function initializeSocket(io) {
   io.on('connection', (socket) => {
     const userId = socket.handshake.auth.userId;
     console.log('A user connected', socket.id, userId);
+
+    projectElementSocket(io, socket)
 
     socket.on('joinProject', ({ projectId }) => {
       const project = getProjectById(projectId);

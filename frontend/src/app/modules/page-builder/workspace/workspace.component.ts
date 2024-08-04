@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ElementType } from "../elements/element.dictionary";
-import { ElementDetailModel } from "../models/element.model";
+import { ElementInfoModel } from "../models/element.model";
 import { getDefaultConfigForElement, getDefaultExtraConfigForElement } from "../elements/elements.config";
 import { PageBuilderService } from "../page-builder.service";
 import { debounceTime, fromEvent, Observable, Subscription } from "rxjs";
@@ -14,16 +14,13 @@ import { environment } from "../../../../environments/environment";
 export class WorkspaceComponent implements OnInit, OnDestroy {
   @ViewChild('TrackMouseActivityRef', {static: true}) workspaceContainerRef!: ElementRef;
 
-  components: {
-    id?: string,
-    elementType: ElementType,
-    elementDetail?: ElementDetailModel
-  }[] = [];
+  projectElements$: Observable<ElementInfoModel[]>;
   userActivities$?: Observable<UserActivityModel[]>;
   subscriptions: Subscription[] = [];
 
 
   constructor(private pageBuilderService: PageBuilderService) {
+    this.projectElements$ = this.pageBuilderService.projectElements$
   }
 
   onDragOver(event: DragEvent) {
@@ -34,41 +31,30 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     event.preventDefault();
     const componentName = event.dataTransfer?.getData('elementType') as ElementType;
     if (componentName) {
-      this.addComponent(componentName);
+      this.pageBuilderService.addElement(componentName);
     }
   }
 
-  onDragStart(event: DragEvent, index: number) {
+  onDragStart(event: DragEvent, index: number, elementId?: string) {
     event.dataTransfer?.setData('index', index.toString());
+    event.dataTransfer?.setData('elementId', elementId || '');
   }
 
   onDropSort(event: DragEvent, newIndex: number) {
     event.preventDefault();
-    const oldIndex = parseInt(event.dataTransfer?.getData('index') || '', 10);
-    if (!isNaN(oldIndex)) {
-      const [movedComponent] = this.components.splice(oldIndex, 1);
-      this.components.splice(newIndex, 0, movedComponent);
+    const elementId = event.dataTransfer?.getData('elementId')
+    if(elementId) {
+      this.pageBuilderService.changeElementSequence(elementId, newIndex)
     }
-  }
-
-  addComponent(elementType: ElementType) {
-    this.components.push({
-      id: String(this.components.length + 1),
-      elementType: elementType,
-      elementDetail: {
-        content: `${elementType} ${this.components.length + 1}`,
-        sequence: this.components.length,
-        generalConfig: getDefaultConfigForElement(elementType),
-        extraConfig: getDefaultExtraConfigForElement(elementType)
-      }
-    });
+    // const oldIndex = parseInt(event.dataTransfer?.getData('index') || '', 10);
+    // if (!isNaN(oldIndex)) {
+    //   const [movedComponent] = this.projectElements.splice(oldIndex, 1);
+    //   this.projectElements.splice(newIndex, 0, movedComponent);
+    // }
   }
 
   ngOnInit(): void {
     this.userActivities$ = this.pageBuilderService.getProjectUsersActivity()
-    this.userActivities$.pipe(debounceTime(1000)).subscribe(res => {
-      console.log(res)
-    })
     this.subscriptions.push(fromEvent<MouseEvent>(this.workspaceContainerRef.nativeElement, 'mousemove')
       .pipe(debounceTime(environment.MOUSE_ACTIVITY_DEBOUNCE_TIME || 100))
       .subscribe((event: MouseEvent) => {

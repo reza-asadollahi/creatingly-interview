@@ -23,7 +23,9 @@
       <mat-expansion-panel-header>
         <mat-panel-title> Layers </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>List of Workspace layers ...</p>
+      <div class="p-2 cursor-pointer border-top" *ngFor="let element of projectElements$ | async">
+        {{element?.sequence}} - {{element?.content || element?.elementType}}
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

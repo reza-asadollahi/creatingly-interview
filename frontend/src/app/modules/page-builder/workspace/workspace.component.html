@@ -1,13 +1,13 @@
 <div class="workspace-container" #TrackMouseActivityRef>
   <div class="main-workspace-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
-      <app-dynamic-element *ngFor="let component of components; let i = index"
+      <app-dynamic-element *ngFor="let component of (projectElements$ | async); let i = index"
                            draggable="true"
-                           (dragstart)="onDragStart($event, i)"
+                           (dragstart)="onDragStart($event, i, component.id)"
                            (drop)="onDropSort($event, i)"
                            (dragover)="onDragOver($event)"
                            [id]="component.id"
                            [elementType]="component.elementType"
-                           [elementDetail]="component.elementDetail"></app-dynamic-element>
+                           [elementInfo]="component"></app-dynamic-element>
   </div>
 
   @if (userActivities$ | async) {

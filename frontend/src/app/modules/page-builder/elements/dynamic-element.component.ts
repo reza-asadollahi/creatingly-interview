@@ -1,19 +1,19 @@
-import { Component, Injector, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { ELEMENT_COMPONENT_MAP, ElementType } from "./element.dictionary";
-import { ElementConfigModel, ElementDetailModel } from "../models/element.model";
+import { ElementInfoModel } from "../models/element.model";
 import { BaseElementComponent } from "./base-element.component";
 
 @Component({
   selector: 'app-dynamic-element',
   template: `
     @if (component) {
-      <ng-container *ngComponentOutlet="component; inputs: elementDetail || {}"></ng-container>
+      <ng-container *ngComponentOutlet="component; inputs: elementInfo || {}"></ng-container>
     }
   `,
 })
 export class DynamicElementComponent implements OnChanges {
   @Input() elementType?: ElementType
-  @Input() elementDetail?: ElementDetailModel | any
+  @Input() elementInfo?: ElementInfoModel | any
 
   component?: BaseElementComponent | any
 

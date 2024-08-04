@@ -1,6 +1,6 @@
 import { Component, Injector, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { ELEMENT_COMPONENT_MAP, ElementType } from "./element.dictionary";
-import { ElementConfigModel, ElementDetailModel } from "./element.model";
+import { ElementConfigModel, ElementDetailModel } from "../models/element.model";
 import { BaseElementComponent } from "./base-element.component";
 
 @Component({

@@ -7,6 +7,13 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ELEMENT_COMPONENT_LIST } from "./elements/element.dictionary";
 import { DynamicElementComponent } from "./elements/dynamic-element.component";
+import {
+  MatAccordion, MatExpansionModule,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
+import { SocketService } from "./socket.service";
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -28,7 +35,11 @@ const routes : Routes = [
     RouterModule.forChild(routes),
     SocketIoModule.forRoot(config),
     // importing stand alone components
-    ...ELEMENT_COMPONENT_LIST
+    ...ELEMENT_COMPONENT_LIST,
+    MatExpansionModule
+  ],
+  providers: [
+    SocketService
   ]
 })
 export class PageBuilderModule { }

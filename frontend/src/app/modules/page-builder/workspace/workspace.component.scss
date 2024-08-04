@@ -1,12 +1,3 @@
-.main-workspace-area {
-  background-color: #fff;
-  min-height: 100%;
-  width: 100%;
-  border-radius: 2px;
-  box-shadow: 0 0 5px 3px #0001;
-  overflow: hidden;
-}
-
 .workspace-container {
   background: #f9fafb;
   width: calc(100vw - 200px);
@@ -14,4 +5,43 @@
   min-height: 400px;
   padding: 1rem 2rem;
   overflow: auto;
+  position: relative;
+}
+
+.main-workspace-area {
+  background-color: #fff;
+  min-height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 5px 3px #0001;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-mouse-info {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  transition: .1s;
+
+  .user-cursor {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: inherit;
+
+  }
+
+  .user-cursor-label {
+    padding: 2px 3px;
+    border-radius: 2px;
+    color: white;
+    background-color: inherit;
+    font-size: .6rem;
+    line-height: .6rem;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 10px;
+  }
 }

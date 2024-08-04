@@ -22,3 +22,10 @@ exports.deleteProject = (req, res) => {
   deleteProject(projectId);
   res.status(200).json({ message: 'Project deleted' });
 };
+
+exports.getProjectById = (req, res) => {
+  const { projectId } = req.params;
+  const project = getProjectById(projectId);
+  if (!project) return res.status(404).json({ message: 'Project not found' });
+  res.status(200).json(project);
+};

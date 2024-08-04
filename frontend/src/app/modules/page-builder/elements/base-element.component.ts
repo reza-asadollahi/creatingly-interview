@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ElementConfigModel } from "./element.model";
+import { ElementConfigModel } from "../models/element.model";
 
 /**
  * To Create Your own custom element, create a standalone component that inherit from BaseElementComponent then assign new type to your component in the "element.dictionary.ts" file

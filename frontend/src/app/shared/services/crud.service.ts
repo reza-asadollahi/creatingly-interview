@@ -25,4 +25,8 @@ export abstract class CRUDService<T> {
   delete(entityId: string) {
     return this.http.delete<T>(`${this.API_URL}/${entityId}`);
   }
+
+  getById(entityId: string) {
+    return this.http.get<T>(`${this.API_URL}/${entityId}`);
+  }
 }

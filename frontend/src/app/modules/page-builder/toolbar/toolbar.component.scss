@@ -5,9 +5,29 @@
   height: calc(100vh - var(--header-height));
 }
 
-.draggable {
-  margin: 10px 0;
-  padding: 10px;
-  background: #ccc;
+.draggable-element {
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #0002;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  img {
+    width: 80%;
+    object-fit: contain;
+    aspect-ratio: 1;
+  }
+
+  p {
+    margin: 0;
+    font-size: .8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
 }

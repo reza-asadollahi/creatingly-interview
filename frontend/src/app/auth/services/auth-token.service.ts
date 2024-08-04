@@ -15,7 +15,7 @@ export class AuthTokenService {
     return token
   }
 
-  set token(token) {
+  set token(token: string | null) {
     this._token$.next(token);
     if(token)
       localStorage.setItem('token', token)

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { ElementConfigModel } from "../../modules/page-builder/elements/element.model";
+import { ElementConfigModel } from "../../modules/page-builder/models/element.model";
 
 const IGNORED_CONFIG_KEYS = ['id', 'cssClasses']
 

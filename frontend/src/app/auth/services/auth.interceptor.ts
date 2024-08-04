@@ -25,6 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(finalRequest).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 401) {
+        this.tokenService.token = null
         return this.router.navigate(['auth']);
       }
 

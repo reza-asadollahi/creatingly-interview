@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ElementConfigModel } from "../element.model";
+import { ElementConfigModel } from "../../models/element.model";
 import { BaseElementComponent } from "../base-element.component";
 import { SharedModule } from "../../../../shared/shared.module";
 

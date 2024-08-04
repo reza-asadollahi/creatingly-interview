@@ -6,7 +6,7 @@ import { AuthTokenService } from "./auth-token.service";
 import { catchError } from "rxjs/operators";
 
 @Injectable({ providedIn: 'root' })
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private router: Router,
               private tokenService: AuthTokenService) {}

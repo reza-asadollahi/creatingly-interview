@@ -66,6 +66,9 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userActivities$ = this.pageBuilderService.getProjectUsersActivity()
+    this.userActivities$.pipe(debounceTime(1000)).subscribe(res => {
+      console.log(res)
+    })
     this.subscriptions.push(fromEvent<MouseEvent>(this.workspaceContainerRef.nativeElement, 'mousemove')
       .pipe(debounceTime(environment.MOUSE_ACTIVITY_DEBOUNCE_TIME || 100))
       .subscribe((event: MouseEvent) => {

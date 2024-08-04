@@ -27,10 +27,9 @@
 
   .user-cursor {
     width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    height: 15px;
     background-color: inherit;
-
+    clip-path: polygon(100% 69%, 55% 68%, 75% 95%, 54% 100%, 33% 73%, 0 95%, 0 0);
   }
 
   .user-cursor-label {

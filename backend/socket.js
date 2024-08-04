@@ -1,4 +1,5 @@
 const { getProjectById, userJoinsProject, userLeftProject, userMoveMouse } = require('./models/project');
+const { getUserById } = require("./models/user");
 
 function initializeSocket(io) {
   io.on('connection', (socket) => {
@@ -26,9 +27,10 @@ function initializeSocket(io) {
     });
 
     socket.on('mouseMove', ({ projectId, position }) => {
-
-      const listOfUsersInProject = userMoveMouse(projectId, userId, position)
-      socket.to(projectId).emit('projectUsersActivity', listOfUsersInProject);
+      if(getUserById(userId)) {
+        const listOfUsersInProject = userMoveMouse(projectId, userId, position)
+        socket.to(projectId).emit('projectUsersActivity', listOfUsersInProject);
+      }
     });
 
     socket.on('disconnect', () => {

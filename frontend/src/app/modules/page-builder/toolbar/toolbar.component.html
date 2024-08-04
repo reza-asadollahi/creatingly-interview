@@ -1,0 +1,8 @@
+<div class="sidebar">
+  <div *ngFor="let elementType of selectableElements"
+       class="draggable"
+       draggable="true"
+       (dragstart)="onDragStart($event, elementType)">
+    {{ elementType | uppercase }}
+  </div>
+</div>

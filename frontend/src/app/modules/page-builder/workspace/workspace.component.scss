@@ -1,0 +1,17 @@
+.main-workspace-area {
+  background-color: #fff;
+  min-height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 5px 3px #0001;
+  overflow: hidden;
+}
+
+.workspace-container {
+  background: #f9fafb;
+  width: calc(100vw - 200px);
+  height: calc(100vh - var(--header-height));
+  min-height: 400px;
+  padding: 1rem 2rem;
+  overflow: auto;
+}

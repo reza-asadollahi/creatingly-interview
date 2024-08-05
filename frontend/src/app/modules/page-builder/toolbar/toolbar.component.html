@@ -1,0 +1,31 @@
+<div class="sidebar">
+  <mat-accordion >
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Elements </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div *ngFor="let elementType of selectableElements"
+               class="draggable-element col-6 p-2"
+               draggable="true"
+               (dragstart)="onDragStart($event, elementType)">
+            <img [src]="elementIcons.get(elementType) || '/assets/svg/square-dashed.svg'" alt="Element Icons">
+            <p>{{ elementType | uppercase }}</p>
+          </div>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Layers </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="p-2 cursor-pointer border-top" *ngFor="let element of projectElements$ | async">
+        {{element?.sequence}} - {{element?.content || element?.elementType}}
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

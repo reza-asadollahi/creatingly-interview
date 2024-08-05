@@ -1,0 +1,24 @@
+<div class="workspace-container" #TrackMouseActivityRef>
+  <div class="main-workspace-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+      <app-dynamic-element *ngFor="let component of (projectElements$ | async); let i = index"
+                           draggable="true"
+                           (dragstart)="onDragStart($event, i, component.id)"
+                           (drop)="onDropSort($event, i)"
+                           (dragover)="onDragOver($event)"
+                           [id]="component.id"
+                           [elementType]="component.elementType"
+                           [elementInfo]="component"></app-dynamic-element>
+  </div>
+
+  @if (userActivities$ | async) {
+    <div *ngFor="let user of (userActivities$ | async)">
+      <div class="user-mouse-info bg-{{user?.userInfo?.color || 'gray'}}"
+           [ngStyle]="{'top.px': user?.mousePosition?.[1], 'left.px': user?.mousePosition?.[0]}">
+        <div class="user-cursor"></div>
+        <div class="user-cursor-label">
+          {{ user?.userInfo?.name }}
+        </div>
+      </div>
+    </div>
+  }
+</div>

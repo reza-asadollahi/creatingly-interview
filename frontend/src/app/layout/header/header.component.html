@@ -1,0 +1,22 @@
+<div id="header-section">
+  <div>
+  <div *ngIf="userInfo | async" class="user-info mx-2 cursor-pointer" [matMenuTriggerFor]="menu">
+      <div class="avatar bg-{{(userInfo | async)?.color}}">{{(userInfo | async)?.name?.[0] | uppercase}}</div>
+      <div class="user-name">{{(userInfo | async)?.name}}</div>
+<!--      <small class="mx-2 cursor-pointer text-white">(Logout)</small>-->
+  </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+  </div>
+  <div>
+    <img [src]="logoSrc" width="100" height="40" alt="">
+  </div>
+  <div class="p-2">
+    @if (userInfo | async) {
+      <a class="link-light text-decoration-none" routerLink="/projects">Projects</a>
+    } @else {
+      <a class="link-light text-decoration-none" routerLink="/auth">Sign In</a>
+    }
+  </div>
+</div>

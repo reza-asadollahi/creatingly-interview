@@ -11,8 +11,8 @@ export type LinkExtraConfig = {
 @Component({
   selector: 'widget-link',
   template: `
-    <a [class]="generalConfig?.cssClasses"
-       [style]="generalConfig | mapConfigToStyle"
+    <a [ngClass]="generalConfig?.cssClasses"
+       [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
        [routerLink]="extraConfig?.href"
        [target]="extraConfig?.target">
       {{ content }}

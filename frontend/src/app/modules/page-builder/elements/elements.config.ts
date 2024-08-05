@@ -1,5 +1,8 @@
 import { ElementConfigModel } from "../models/element.model";
 import { ElementType } from "./element.dictionary";
+import { HeadingExtraConfig } from "./element-components/heading.component";
+import { LinkExtraConfig } from "./element-components/link.component";
+import { ImageExtraConfig } from "./element-components/img.component";
 
 /** setup default config for elements */
 const ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP = new Map<ElementType, ElementConfigModel>()
@@ -7,7 +10,7 @@ ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP.set('div', {
   width: '100%',
   height: '50px',
   position: 'relative',
-  backgroundColor: 'red'
+  backgroundColor: '#ccc'
 })
 ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP.set('heading', {})
 ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP.set('image', { width: '100%', height: 'auto' })
@@ -15,9 +18,9 @@ ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP.set('image', { width: '100%', height: 'auto
 /** setup default extra config for elements */
 const ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP = new Map<ElementType, any>()
 ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('div', {})
-ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('heading', {})
-ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('image', { src: '/assets/styles/creatingly-poster.png'})
-ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('link', {})
+ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('heading', <HeadingExtraConfig>{headSize: "h2"})
+ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('image', <ImageExtraConfig>{ src: '/assets/styles/creatingly-poster.png'})
+ELEMENT_COMPONENT_DEFAULT_EXTRA_CONFIG_MAP.set('link', <LinkExtraConfig>{})
 
 function getDefaultConfigForElement(elementType: ElementType) {
   return ELEMENT_COMPONENT_DEFAULT_CONFIG_MAP.get(elementType) || {};

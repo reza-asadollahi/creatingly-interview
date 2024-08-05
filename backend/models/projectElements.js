@@ -3,12 +3,15 @@ const { v4: uuidV4 } = require('uuid');
 /** map project id to list of Elements and it's configuration */
 const PROJECT_ELEMENTS = new Map()
 
-function addElementToProject(projectId, elementInfo) {
+function addElementToProject(projectId, elementInfo, index) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
   const element = { id: uuidV4(), ...elementInfo, sequence: projectElements?.length || 1 };
   if(!projectElements) {
     projectElements = [element]
     PROJECT_ELEMENTS.set(projectId, projectElements)
+  } else if(!isNaN(index) || index !== undefined) {
+    projectElements.splice(index, 0, element)
+    projectElements.forEach((pel, i) => (pel.sequence = i+1))
   } else {
     projectElements.push(element)
   }
@@ -32,8 +35,9 @@ function deleteElementOfProject(projectId, id) {
 
 function updateElementOfProject(projectId, elementInfo) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
-  const index =  projectElements.findIndex(el => el.id === elementInfo.id);
-  if (index !== -1) projectElements[index] = {...projectElements[index], ...elementInfo}
+  const index =  projectElements?.findIndex(el => el.id === elementInfo.id);
+  if (index !== undefined || index !== -1) projectElements[index] = {...projectElements[index], ...elementInfo}
+  return projectElements
 }
 
 function changeElementSequence(projectId, id, newSequence) {

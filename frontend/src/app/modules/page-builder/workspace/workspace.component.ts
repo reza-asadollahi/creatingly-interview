@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ElementType } from "../elements/element.dictionary";
 import { ElementInfoModel } from "../models/element.model";
-import { getDefaultConfigForElement, getDefaultExtraConfigForElement } from "../elements/elements.config";
 import { PageBuilderService } from "../page-builder.service";
 import { debounceTime, fromEvent, Observable, Subscription } from "rxjs";
 import { environment } from "../../../../environments/environment";
@@ -17,7 +16,6 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   projectElements$: Observable<ElementInfoModel[]>;
   userActivities$?: Observable<UserActivityModel[]>;
   subscriptions: Subscription[] = [];
-
 
   constructor(private pageBuilderService: PageBuilderService) {
     this.projectElements$ = this.pageBuilderService.projectElements$
@@ -45,12 +43,11 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     const elementId = event.dataTransfer?.getData('elementId')
     if(elementId) {
       this.pageBuilderService.changeElementSequence(elementId, newIndex)
+    } else {
+      event.stopPropagation();
+      const componentName = event.dataTransfer?.getData('elementType') as ElementType;
+      this.pageBuilderService.addElement(componentName, newIndex);
     }
-    // const oldIndex = parseInt(event.dataTransfer?.getData('index') || '', 10);
-    // if (!isNaN(oldIndex)) {
-    //   const [movedComponent] = this.projectElements.splice(oldIndex, 1);
-    //   this.projectElements.splice(newIndex, 0, movedComponent);
-    // }
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from "./socket.service";
-import { BehaviorSubject, map, tap } from "rxjs";
+import { map, tap } from "rxjs";
 import { AuthTokenService } from "../../auth/services/auth-token.service";
 import { ElementType } from "./elements/element.dictionary";
 import { getDefaultConfigForElement, getDefaultExtraConfigForElement } from "./elements/elements.config";
@@ -52,18 +52,26 @@ export class PageBuilderService {
     return this._projectElements$
   }
 
-  addElement(elementType: ElementType) {
+  addElement(elementType: ElementType, index?: number) {
     const newElement: ElementInfoModel = {
       elementType: elementType,
       content: `${elementType} ${this.projectElements.length + 1}`,
-      sequence: this.projectElements.length,
+      sequence: index || this.projectElements.length,
       generalConfig: getDefaultConfigForElement(elementType),
       extraConfig: getDefaultExtraConfigForElement(elementType)
     };
-    this.socket.emit('addElementToProject', {projectId: this.projectId, elementInfo:newElement })
+    this.socket.emit('addElementToProject', {projectId: this.projectId, elementInfo:newElement, index })
   }
 
   changeElementSequence(elementId: string, newSequence: number) {
     this.socket.emit('changeElementSequence', { projectId: this.projectId, elementId, newSequence})
+  }
+
+  getElementById(id?: string) {
+    return this.projectElements.find(el => el.id === id)
+  }
+
+  updateElement(elementInfo: ElementInfoModel) {
+    this.socket.emit('updateElement', { projectId: this.projectId, elementInfo })
   }
 }

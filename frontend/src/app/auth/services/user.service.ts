@@ -37,8 +37,7 @@ export class UserService {
       },
       error: err => {
         console.warn(err)
-        this._userInfo$.next(null)
-        this.router.navigate(['auth'])
+        this.logout()
       }
     })
   }

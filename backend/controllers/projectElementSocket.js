@@ -14,8 +14,8 @@ function projectElementSocket(io, socket) {
     socket.emit('projectListElementChanges', listOfAllElementInProject);
   });
 
-  socket.on('addElementToProject', ({ projectId, elementInfo }) => {
-    const element = addElementToProject(projectId, elementInfo);
+  socket.on('addElementToProject', ({ projectId, elementInfo, index }) => {
+    const element = addElementToProject(projectId, elementInfo, index);
     const listOfAllElementInProject = getAllElementOfProject(projectId)
     io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
     // io.to(projectId).emit('projectElementChanges', element);
@@ -23,6 +23,11 @@ function projectElementSocket(io, socket) {
 
   socket.on('changeElementSequence', ({ projectId, elementId, newSequence }) => {
     const listOfAllElementInProject = changeElementSequence(projectId, elementId, newSequence);
+    io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
+  });
+
+  socket.on('updateElement', ({ projectId, elementInfo }) => {
+    const listOfAllElementInProject = updateElementOfProject(projectId, elementInfo);
     io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
   });
 }

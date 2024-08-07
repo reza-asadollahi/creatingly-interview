@@ -10,11 +10,7 @@ export type ImageExtraConfig = {src?: string, altText?: string}
   template: `
     <img [ngClass]="generalConfig?.cssClasses"
          [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
-         class="resizable-tag"
-         (mousedown)="onMouseDown($event)"
-         (mousemove)="onMouseMove($event)"
-         (mouseup)="onMouseUp($event)"
-         (mouseleave)="onMouseLeave($event)"
+         class="resizable-tag" #resizableTagRef
          [src]="extraConfig?.src"
          [alt]="extraConfig?.altText">
   `,

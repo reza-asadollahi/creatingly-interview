@@ -1,4 +1,4 @@
-import { Component, inject, Input } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, inject, Input, ViewChild } from "@angular/core";
 import { ElementConfigModel } from "../models/element.model";
 import { ElementType } from "./element.dictionary";
 import { PageBuilderService } from "../page-builder.service";
@@ -8,7 +8,7 @@ import { PageBuilderService } from "../page-builder.service";
  * the generic type "T" is used for extraConfig property
  * */
 @Component({template: ""})
-export abstract class BaseElementComponent<T = any> {
+export abstract class BaseElementComponent<T = any> implements AfterViewInit {
   @Input() id?: string
   @Input() elementType?: ElementType
   @Input() generalConfig?: ElementConfigModel
@@ -23,6 +23,18 @@ export abstract class BaseElementComponent<T = any> {
   private lastY?: number;
 
   protected pageBuilderService: PageBuilderService = inject(PageBuilderService)
+
+  @ViewChild('resizableTagRef') resizableTag!: ElementRef;
+
+  ngAfterViewInit() {
+    const element = this.resizableTag?.nativeElement;
+    if(element) {
+      element.addEventListener('mousedown', this.onMouseDown.bind(this));
+      element.addEventListener('mousemove', this.onMouseMove.bind(this));
+      element.addEventListener('mouseup', this.onMouseUp.bind(this));
+      element.addEventListener('mouseleave', this.onMouseLeave.bind(this));
+    }
+  }
 
   onMouseDown(event: MouseEvent): void {
     if (this.isInResizeZone(event)) {

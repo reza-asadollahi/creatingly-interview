@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, TrackByFunction, ViewChild } from '@angular/core';
 import { ElementType } from "../elements/element.dictionary";
 import { ElementInfoModel } from "../models/element.model";
 import { PageBuilderService } from "../page-builder.service";
@@ -19,6 +19,10 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 
   constructor(private pageBuilderService: PageBuilderService) {
     this.projectElements$ = this.pageBuilderService.projectElements$
+  }
+
+  elementTrackByFn(index: number, item:ElementInfoModel) {
+    return item?.id
   }
 
   onDragOver(event: DragEvent) {

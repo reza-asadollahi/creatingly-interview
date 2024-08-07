@@ -12,10 +12,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h1 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h1>
       }
@@ -23,10 +20,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h2 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h2>
       }
@@ -34,10 +28,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h3 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h3>
       }
@@ -45,10 +36,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h4 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h4>
       }
@@ -56,10 +44,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h5 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h5>
       }
@@ -67,10 +52,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h6 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h6>
       }
@@ -78,10 +60,7 @@ export type HeadingExtraConfig  = {headSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' |
         <h2 [ngClass]="generalConfig?.cssClasses"
             [ngStyle]="generalConfig | mapConfigToStyle : tempConfig"
             class="resizable-tag"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="onMouseLeave($event)">
+            #resizableTagRef>
           {{ content }}
         </h2>
       }

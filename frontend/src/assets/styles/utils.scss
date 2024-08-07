@@ -5,12 +5,12 @@
 
 .resizable-tag {
   transition: 100ms;
+  box-sizing: border-box;
 
   &:hover {
     position: relative;
-    outline: 2px solid #0003;
+    outline: 2px solid #0002;
     user-select: none;
-    box-sizing: border-box;
 
     &::after {
       content: '';

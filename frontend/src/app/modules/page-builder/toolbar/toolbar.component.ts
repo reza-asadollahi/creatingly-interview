@@ -17,12 +17,15 @@ export class ToolbarComponent {
   elementIcons = ELEMENT_ICON_MAP
   projectElements$: Observable<ElementInfoModel[]>;
 
-  onDragStart(event: DragEvent, component: ElementType) {
-    event.dataTransfer?.setData('elementType', component);
-  }
+  editingElement$: Observable<ElementInfoModel | undefined>
 
   constructor(private pageBuilderService: PageBuilderService) {
     this.projectElements$ = this.pageBuilderService.projectElements$
+    this.editingElement$ = this.pageBuilderService.editingElement$;
+  }
+
+  onDragStart(event: DragEvent, component: ElementType) {
+    event.dataTransfer?.setData('elementType', component);
   }
 
   deleteElement(id?: string) {

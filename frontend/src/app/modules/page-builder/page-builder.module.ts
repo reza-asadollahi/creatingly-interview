@@ -15,6 +15,11 @@ import {
 } from "@angular/material/expansion";
 import { SocketService } from "./socket.service";
 import { SharedModule } from "../../shared/shared.module";
+import { ConfigFormComponent } from "./config-form/config-form.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatOption, MatSelect } from "@angular/material/select";
+import { MatInput, MatInputModule } from "@angular/material/input";
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -30,6 +35,7 @@ const routes : Routes = [
     WorkspaceComponent,
     ToolbarComponent,
     DynamicElementComponent,
+    ConfigFormComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,13 @@ const routes : Routes = [
     // importing stand alone components
     ...ELEMENT_COMPONENT_LIST,
     MatExpansionModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption,
   ],
   providers: [
     SocketService

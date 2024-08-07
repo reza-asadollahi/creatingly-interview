@@ -83,4 +83,8 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe())
   }
+
+  editElement(component: ElementInfoModel) {
+    this.pageBuilderService.selectElementToEdit(component)
+  }
 }

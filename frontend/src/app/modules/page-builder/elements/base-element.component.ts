@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, inject, Input, ViewChild } from "
 import { ElementConfigModel } from "../models/element.model";
 import { ElementType } from "./element.dictionary";
 import { PageBuilderService } from "../page-builder.service";
+import { Observable } from "rxjs";
 
 /**
  * To Create Your own custom element, create a standalone component that inherit from BaseElementComponent then assign new type to your component in the "element.dictionary.ts" file

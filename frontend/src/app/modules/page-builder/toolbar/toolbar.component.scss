@@ -1,8 +1,15 @@
 .sidebar {
-  width: 200px;
+  width: 280px;
   background: #f0f0f0;
   padding: 10px;
   height: calc(100vh - var(--header-height));
+  position: relative;
+  overflow-y: auto;
+
+  .project-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
 }
 
 .draggable-element {

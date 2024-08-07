@@ -11,6 +11,7 @@
           (dragstart)="onDragStart($event, i, component.id)"
           (drop)="onDropSort($event, i)"
           (dragover)="onDragOver($event)"
+          (dblclick)="editElement(component)"
           [id]="component.id"
           [elementType]="component.elementType"
           [elementInfo]="component"></app-dynamic-element>

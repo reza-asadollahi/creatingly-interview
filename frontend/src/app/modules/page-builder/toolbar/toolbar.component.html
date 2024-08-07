@@ -1,9 +1,9 @@
 <div class="sidebar">
-  <h4 class="mb-2 text-center">{{projectInfo?.name}}</h4>
-  <mat-accordion >
+  <h4 class="project-title">{{ projectInfo?.name }}</h4>
+  <mat-accordion>
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
-        <mat-panel-title> Elements </mat-panel-title>
+        <mat-panel-title> Elements</mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="container-fluid">
@@ -22,12 +22,21 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Layers </mat-panel-title>
+        <mat-panel-title> Layers</mat-panel-title>
       </mat-expansion-panel-header>
       <div class="border-top d-flex justify-content-between py-2" *ngFor="let element of projectElements$ | async">
-        <span>{{element?.sequence}} - {{element?.content || element?.elementType}}</span>
+        <span>{{ element?.sequence }} - {{ element?.content || element?.elementType }}</span>
         <button class="btn text-danger p-1" style="font-size: 0.5rem" (click)="deleteElement(element.id)">X</button>
       </div>
     </mat-expansion-panel>
+
+    @if (editingElement$ | async) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Element Config </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-config-form/>
+      </mat-expansion-panel>
+    }
   </mat-accordion>
 </div>

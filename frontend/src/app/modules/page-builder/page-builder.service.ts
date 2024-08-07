@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from "./socket.service";
-import { map, tap } from "rxjs";
+import { BehaviorSubject, map, tap } from "rxjs";
 import { AuthTokenService } from "../../auth/services/auth-token.service";
 import { ElementType } from "./elements/element.dictionary";
 import { getDefaultConfigForElement, getDefaultExtraConfigForElement } from "./elements/elements.config";
-import { ElementInfoModel } from "./models/element.model";
+import { ElementConfigModel, ElementInfoModel } from "./models/element.model";
 import { ProjectModel } from "../projects/project.model";
 
 @Injectable()
 export class PageBuilderService {
   private _project?: ProjectModel;
   private userId: string | null;
+  private _editingElement$: BehaviorSubject<ElementInfoModel | undefined> = new BehaviorSubject<ElementInfoModel | undefined>(undefined)
   private _projectElements: ElementInfoModel[] = [];
   private _projectElements$ = this.socket.fromEvent<ElementInfoModel[]>('projectListElementChanges').pipe(tap(res => this._projectElements = res));
 
@@ -76,5 +77,16 @@ export class PageBuilderService {
 
   updateElement(elementInfo: ElementInfoModel) {
     this.socket.emit('updateElement', { projectId: this.projectId, elementInfo })
+  }
+
+  get editingElement$() {
+    return this._editingElement$.asObservable()
+  }
+
+  selectElementToEdit(elementInfo?: ElementInfoModel) {
+    if(this._editingElement$.value != elementInfo) {
+      this.socket.emit('lockElementForUser', {projectId: this.projectId})
+    }
+    this._editingElement$.next(elementInfo);
   }
 }

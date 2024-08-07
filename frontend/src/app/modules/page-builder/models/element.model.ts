@@ -24,6 +24,6 @@ export interface ElementInfoModel {
   generalConfig?: ElementConfigModel
   content?: string
   sequence?: number
-  lockedByUser?: string
   extraConfig?: any
+  lockedByUser?: UserModel
 }

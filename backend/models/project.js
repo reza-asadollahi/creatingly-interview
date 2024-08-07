@@ -1,12 +1,12 @@
-const { v4: uuidV4 } = require('uuid');
-const { getUserById } = require('./user')
+const {v4: uuidV4} = require('uuid');
+const {getUserById} = require('./user')
 
 const ALL_PROJECTS = []
 /** map project id to list of users info and mouse position */
 const PROJECT_USERS = new Map()
 
 function createProject(name, owner, styles = {}) {
-  const project = { id: uuidV4(), name, owner, styles };
+  const project = {id: uuidV4(), name, owner, styles};
   ALL_PROJECTS.push(project);
   return project;
 }
@@ -26,13 +26,13 @@ function deleteProject(id) {
 
 
 function userJoinsProject(projectId, userId) {
-  if(!PROJECT_USERS.get(projectId))
+  if (!PROJECT_USERS.get(projectId))
     PROJECT_USERS.set(projectId, [])
 
   const listOfUsersInProject = PROJECT_USERS.get(projectId)
 
 
-  if(!listOfUsersInProject.find(item => item.id === userId))
+  if (!listOfUsersInProject.find(item => item.id === userId))
     listOfUsersInProject.push({
       id: userId,
       userInfo: getUserById(userId),
@@ -43,24 +43,35 @@ function userJoinsProject(projectId, userId) {
 }
 
 function userLeftProject(projectId, userId) {
-  if(!PROJECT_USERS.get(projectId))
+  if (!PROJECT_USERS.get(projectId))
     PROJECT_USERS.set(projectId, [])
 
   const listOfUsersInProject = PROJECT_USERS.get(projectId)
   const userInfoIndex = listOfUsersInProject.findIndex(item => item.id === userId)
-  if(userInfoIndex !== -1)
+  if (userInfoIndex !== -1)
     listOfUsersInProject.splice(userInfoIndex, 1)
 
   return listOfUsersInProject
 }
 
+function userDisconnect(userId) {
+  for (let projectId of PROJECT_USERS.keys()) {
+    if (PROJECT_USERS.get(projectId)) {
+      const listOfUsersInProject = PROJECT_USERS.get(projectId)
+      const userInfoIndex = listOfUsersInProject.findIndex(item => item.id === userId)
+      if (userInfoIndex !== -1)
+        listOfUsersInProject.splice(userInfoIndex, 1)
+    }
+  }
+}
+
 function userMoveMouse(projectId, userId, mousePosition) {
-  if(!PROJECT_USERS.get(projectId))
+  if (!PROJECT_USERS.get(projectId))
     PROJECT_USERS.set(projectId, [])
 
   const listOfUsersInProject = PROJECT_USERS.get(projectId)
   const userInfo = listOfUsersInProject.find(item => item.id === userId)
-  if(!userInfo)
+  if (!userInfo)
     listOfUsersInProject.push({
       id: userId,
       userInfo: getUserById(userId),
@@ -79,5 +90,6 @@ module.exports = {
   getProjectById,
   userJoinsProject,
   userLeftProject,
+  userDisconnect,
   userMoveMouse
 }

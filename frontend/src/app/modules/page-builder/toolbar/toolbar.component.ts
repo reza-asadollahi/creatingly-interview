@@ -12,7 +12,7 @@ import { ProjectModel } from "../../projects/project.model";
   styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
-  @Input() projectInfo!: ProjectModel;
+  @Input() projectInfo?: ProjectModel;
   selectableElements = ELEMENTS_TYPES
   elementIcons = ELEMENT_ICON_MAP
   projectElements$: Observable<ElementInfoModel[]>;
@@ -23,5 +23,10 @@ export class ToolbarComponent {
 
   constructor(private pageBuilderService: PageBuilderService) {
     this.projectElements$ = this.pageBuilderService.projectElements$
+  }
+
+  deleteElement(id?: string) {
+    if(id)
+      this.pageBuilderService.deleteElement(id)
   }
 }

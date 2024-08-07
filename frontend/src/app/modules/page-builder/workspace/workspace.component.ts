@@ -14,7 +14,7 @@ import { ProjectModel } from "../../projects/project.model";
 export class WorkspaceComponent implements OnInit, OnDestroy {
   @ViewChild('TrackMouseActivityRef', {static: true}) workspaceContainerRef!: ElementRef;
 
-  @Input() projectInfo!: ProjectModel;
+  @Input() projectInfo?: ProjectModel;
 
   projectElements$: Observable<ElementInfoModel[]>;
   userActivities$?: Observable<UserActivityModel[]>;

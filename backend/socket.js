@@ -1,6 +1,7 @@
 const { getProjectById, userJoinsProject, userLeftProject, userMoveMouse } = require('./models/project');
 const { getUserById } = require("./models/user");
-const projectElementSocket = require("./controllers/projectElementSocket");
+const projectElementSocket = require("./sockets/projectElementSocket");
+const projectSocket = require("./sockets/projectSocket");
 
 
 function initializeSocket(io) {
@@ -10,36 +11,7 @@ function initializeSocket(io) {
 
     projectElementSocket(io, socket)
 
-    socket.on('joinProject', ({ projectId }) => {
-      const project = getProjectById(projectId);
-      if (project) {
-        const listOfUsersInProject = userJoinsProject(userId, projectId)
-        socket.join(projectId);
-        socket.to(projectId).emit('projectUsersActivity', listOfUsersInProject);
-        console.log(`User ${userId} joined project ${projectId}`);
-      }
-    });
-
-    socket.on('leaveProject', ({ projectId }) => {
-      const project = getProjectById(projectId);
-      if (project) {
-        const listOfUsersInProject = userLeftProject(projectId, userId)
-        socket.leave(projectId);
-        socket.to(projectId).emit('projectUsersActivity', listOfUsersInProject);
-        console.log(`User ${userId} left project ${projectId}`);
-      }
-    });
-
-    socket.on('mouseMove', ({ projectId, position }) => {
-      if(getUserById(userId)) {
-        const listOfUsersInProject = userMoveMouse(projectId, userId, position)
-        socket.to(projectId).emit('projectUsersActivity', listOfUsersInProject);
-      }
-    });
-
-    socket.on('disconnect', () => {
-      console.log('A user disconnected', socket.id);
-    });
+    projectSocket(io, socket, userId)
   });
 }
 

@@ -21,10 +21,6 @@ export class PageBuilderComponent implements OnInit, OnDestroy {
               private pageBuilderService: PageBuilderService) {
   }
 
-  ngOnDestroy(): void {
-    this.pageBuilderService.joinProject();
-  }
-
   ngOnInit(): void {
     const projectId: string = this.route.snapshot.paramMap.get('projectId') || '';
     if(projectId) {
@@ -41,5 +37,9 @@ export class PageBuilderComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['projects'])
     }
+  }
+
+  ngOnDestroy(): void {
+    this.pageBuilderService.leaveProject();
   }
 }

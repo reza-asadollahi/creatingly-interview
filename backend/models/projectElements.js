@@ -31,6 +31,7 @@ function deleteElementOfProject(projectId, id) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
   const index =  projectElements.findIndex(el => el.id === id);
   if (index !== -1) projectElements.splice(index, 1);
+  return projectElements
 }
 
 function updateElementOfProject(projectId, elementInfo) {

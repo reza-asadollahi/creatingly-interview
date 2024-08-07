@@ -29,8 +29,6 @@ export class PageBuilderService {
 
   joinProject() {
     this.socket.emit('joinProject', {projectId: this.projectId});
-    // this cause receiving all element for first time
-    this.socket.emit('getAllElementList', {projectId: this.projectId});
   }
 
   leaveProject() {
@@ -62,6 +60,10 @@ export class PageBuilderService {
       extraConfig: getDefaultExtraConfigForElement(elementType)
     };
     this.socket.emit('addElementToProject', {projectId: this.projectId, elementInfo:newElement, index })
+  }
+
+  deleteElement(elementId: string) {
+    this.socket.emit('deleteElementFromProject', {projectId: this.projectId, elementId })
   }
 
   changeElementSequence(elementId: string, newSequence: number) {

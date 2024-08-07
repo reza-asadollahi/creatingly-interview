@@ -9,11 +9,6 @@ const {
 
 function projectElementSocket(io, socket) {
 
-  socket.on('getAllElementList', ({ projectId }) => {
-    const listOfAllElementInProject = getAllElementOfProject(projectId);
-    socket.emit('projectListElementChanges', listOfAllElementInProject);
-  });
-
   socket.on('addElementToProject', ({ projectId, elementInfo, index }) => {
     const element = addElementToProject(projectId, elementInfo, index);
     const listOfAllElementInProject = getAllElementOfProject(projectId)
@@ -29,6 +24,11 @@ function projectElementSocket(io, socket) {
   socket.on('updateElement', ({ projectId, elementInfo }) => {
     const listOfAllElementInProject = updateElementOfProject(projectId, elementInfo);
     io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
+  });
+
+  socket.on('deleteElementFromProject', ({ projectId, elementId }) => {
+    const listOfAllElementInProject = deleteElementOfProject(projectId, elementId);
+    io.in(projectId).emit('projectListElementChanges', listOfAllElementInProject);
   });
 }
 

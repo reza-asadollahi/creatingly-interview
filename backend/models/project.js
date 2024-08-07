@@ -5,8 +5,8 @@ const ALL_PROJECTS = []
 /** map project id to list of users info and mouse position */
 const PROJECT_USERS = new Map()
 
-function createProject(name, owner) {
-  const project = { id: uuidV4(), name, owner };
+function createProject(name, owner, styles = {}) {
+  const project = { id: uuidV4(), name, owner, styles };
   ALL_PROJECTS.push(project);
   return project;
 }

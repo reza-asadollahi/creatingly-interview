@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from './project.service';
+import { ProjectModel } from "./project.model";
 
 @Component({
   selector: 'app-projects',
@@ -9,6 +10,7 @@ import { ProjectService } from './project.service';
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
   newProjectName: string = "";
+  newProjectWidth: number = 1000;
 
   constructor(private projectService: ProjectService) { }
 
@@ -18,10 +20,14 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  createProject(name: string) {
-    this.projectService.create({ name }).subscribe((project: any) => {
+  createProject() {
+    let newProject: ProjectModel = {
+      name: this.newProjectName,
+      styles: { width: this.newProjectWidth+'px' }
+    };
+    this.projectService.create(newProject).subscribe((project: any) => {
       this.projects.push(project);
-      this.newProjectName = ""
+      this.resetProjectFormValue()
     });
   }
 
@@ -29,5 +35,10 @@ export class ProjectsComponent implements OnInit {
     this.projectService.delete(projectId).subscribe(() => {
       this.projects = this.projects.filter(project => project._id !== projectId);
     });
+  }
+
+  private resetProjectFormValue() {
+    this.newProjectName = ""
+    this.newProjectWidth = 1000
   }
 }

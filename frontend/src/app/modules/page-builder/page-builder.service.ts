@@ -5,6 +5,7 @@ import { AuthTokenService } from "../../auth/services/auth-token.service";
 import { ElementType } from "./elements/element.dictionary";
 import { getDefaultConfigForElement, getDefaultExtraConfigForElement } from "./elements/elements.config";
 import { ElementInfoModel } from "./models/element.model";
+import { ProjectModel } from "../projects/project.model";
 
 @Injectable()
 export class PageBuilderService {

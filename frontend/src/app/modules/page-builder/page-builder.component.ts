@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { PageBuilderService } from "./page-builder.service";
 import { ProjectService } from "../projects/project.service";
+import { ProjectModel } from "../projects/project.model";
 
 @Component({
   selector: 'app-page-builder',
@@ -12,7 +13,7 @@ import { ProjectService } from "../projects/project.service";
   providers: [PageBuilderService]
 })
 export class PageBuilderComponent implements OnInit, OnDestroy {
-  mousePositions: { [key: string]: { x: number, y: number } } = {};
+  projectInfo!: ProjectModel
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,8 +29,9 @@ export class PageBuilderComponent implements OnInit, OnDestroy {
     const projectId: string = this.route.snapshot.paramMap.get('projectId') || '';
     if(projectId) {
       this.projectService.getById(projectId).subscribe({
-        next: res => {
-          this.pageBuilderService.project = res;
+        next: project => {
+          this.projectInfo = project
+          this.pageBuilderService.project = project;
           this.pageBuilderService.joinProject();
         },
         error: err => {

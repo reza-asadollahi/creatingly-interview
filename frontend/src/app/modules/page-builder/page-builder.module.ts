@@ -14,6 +14,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import { SocketService } from "./socket.service";
+import { SharedModule } from "../../shared/shared.module";
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -36,7 +37,8 @@ const routes : Routes = [
     SocketIoModule.forRoot(config),
     // importing stand alone components
     ...ELEMENT_COMPONENT_LIST,
-    MatExpansionModule
+    MatExpansionModule,
+    SharedModule
   ],
   providers: [
     SocketService

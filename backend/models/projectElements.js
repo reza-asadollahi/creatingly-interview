@@ -1,21 +1,26 @@
-const { v4: uuidV4 } = require('uuid');
+const {v4: uuidV4} = require('uuid');
 
 /** map project id to list of Elements and it's configuration */
 const PROJECT_ELEMENTS = new Map()
 
 function addElementToProject(projectId, elementInfo, index) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
-  const element = { id: uuidV4(), ...elementInfo, sequence: projectElements?.length || 1 };
-  if(!projectElements) {
-    projectElements = [element]
+  let updatedProjectElements = []
+  const newElement = {id: uuidV4(), ...elementInfo, sequence: elementInfo?.sequence ?? projectElements?.length ?? 1};
+  if (!projectElements) {
+    updatedProjectElements = projectElements = [newElement]
     PROJECT_ELEMENTS.set(projectId, projectElements)
-  } else if(!isNaN(index) || index !== undefined) {
-    projectElements.splice(index, 0, element)
-    projectElements.forEach((pel, i) => (pel.sequence = i+1))
+  } else if (!isNaN(index) || index !== undefined) {
+    projectElements.splice(index, 0, newElement)
+    updatedProjectElements = projectElements.slice(index - 1).map((pel, i) => {
+      pel.sequence = index + i + 1
+      return pel
+    })
   } else {
-    projectElements.push(element)
+    projectElements.push(newElement)
+    updatedProjectElements = projectElements
   }
-  return element;
+  return updatedProjectElements;
 }
 
 function getElementProjectById(projectId, id) {
@@ -29,27 +34,66 @@ function getAllElementOfProject(projectId) {
 
 function deleteElementOfProject(projectId, id) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
-  const index =  projectElements.findIndex(el => el.id === id);
-  if (index !== -1) projectElements.splice(index, 1);
+  const index = projectElements.findIndex(el => el.id === id);
+  let updatedProjectElements = []
+  if (index !== -1) {
+    projectElements.splice(index, 1)
+    updatedProjectElements = projectElements.slice(index).map((pel, i) => {
+      pel.sequence = index + i + 1
+      return pel
+    })
+  }
+  return updatedProjectElements
 }
 
-function updateElementOfProject(projectId, elementInfo) {
+function updateElementOfProject(projectId, elementInfo, changeField) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
-  const index =  projectElements?.findIndex(el => el.id === elementInfo.id);
-  if (index !== undefined || index !== -1) projectElements[index] = {...projectElements[index], ...elementInfo}
-  return projectElements
+  const index = projectElements?.findIndex(el => el.id === elementInfo.id);
+  if (index !== undefined || index !== -1) {
+    if (changeField === 'generalConfig') {
+      projectElements[index] = {
+        ...projectElements[index],
+        generalConfig: {
+          ...projectElements[index].generalConfig || {},
+          ...elementInfo?.generalConfig || {}
+        }
+      }
+    } else if (changeField === 'extraConfig') {
+      projectElements[index] = {
+        ...projectElements[index],
+        extraConfig: {
+          ...projectElements[index].extraConfig || {},
+          ...elementInfo?.extraConfig || {}
+        }
+      }
+    } else if (changeField === 'content') {
+      projectElements[index] = {
+        ...projectElements[index],
+        content: elementInfo?.content
+      }
+    } else {
+      projectElements[index] = {...projectElements[index], ...elementInfo}
+    }
+  }
+  return projectElements[index]
 }
 
 function changeElementSequence(projectId, id, newSequence) {
   let projectElements = PROJECT_ELEMENTS.get(projectId)
-  const index =  projectElements.findIndex(el => el.id === id);
+  const updatedProjectElements = []
+  const index = projectElements.findIndex(el => el.id === id);
   if (index !== -1) {
     const [movedElement] = projectElements.splice(index, 1);
     projectElements.splice(newSequence, 0, movedElement);
     // projectElements.splice(newSequence, 0, projectElements.splice(index, 1)[0])
-    projectElements.forEach((pel, i) => (pel.sequence = i+1))
+    projectElements.forEach((el, i) => {
+      if (el.sequence !== i + 1) {
+        el.sequence = i + 1
+        updatedProjectElements.push(el)
+      }
+    })
   }
-  return projectElements
+  return updatedProjectElements
 }
 
 module.exports = {

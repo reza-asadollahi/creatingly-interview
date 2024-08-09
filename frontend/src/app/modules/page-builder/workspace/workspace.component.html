@@ -1,24 +1,37 @@
-<div class="workspace-container" #TrackMouseActivityRef>
-  <div class="main-workspace-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
-      <app-dynamic-element *ngFor="let component of (projectElements$ | async); let i = index"
-                           draggable="true"
-                           (dragstart)="onDragStart($event, i, component.id)"
-                           (drop)="onDropSort($event, i)"
-                           (dragover)="onDragOver($event)"
-                           [id]="component.id"
-                           [elementType]="component.elementType"
-                           [elementInfo]="component"></app-dynamic-element>
-  </div>
-
-  @if (userActivities$ | async) {
-    <div *ngFor="let user of (userActivities$ | async)">
-      <div class="user-mouse-info bg-{{user?.userInfo?.color || 'gray'}}"
-           [ngStyle]="{'top.px': user?.mousePosition?.[1], 'left.px': user?.mousePosition?.[0]}">
-        <div class="user-cursor"></div>
-        <div class="user-cursor-label">
-          {{ user?.userInfo?.name }}
-        </div>
+<div class="workspace-container">
+  <div class="workspace-wrapper" #TrackMouseActivityRef>
+    @if (projectInfo) {
+      <div class="main-workspace-area"
+           [ngStyle]="projectInfo.styles | mapConfigToStyle"
+           (drop)="onDrop($event)"
+           (dragover)="onDragOver($event)">
+        <app-dynamic-element
+          *ngFor="let elm of (projectElements$ | async) | sortBySequence; let i = index; trackBy: elementTrackByFn"
+          draggable="true"
+          (dragstart)="onDragStart($event, elm.id || elm._tempId)"
+          (drop)="onDropSort($event, elm.sequence)"
+          (dragover)="onDragOver($event)"
+          (dblclick)="editElement(elm)"
+          [id]="elm.id"
+          [elementType]="elm.elementType"
+          [elementInfo]="elm"></app-dynamic-element>
       </div>
-    </div>
-  }
+
+      @if (userActivities$ | async) {
+        <div *ngFor="let user of (userActivities$ | async)">
+          <div class="user-mouse-info bg-{{user?.userInfo?.color || 'gray'}}"
+               [ngStyle]="{'top.px': user?.mousePosition?.[1], 'left.px': user?.mousePosition?.[0]}">
+            <div class="user-cursor"></div>
+            <div class="user-cursor-label">
+              {{ user?.userInfo?.name }}
+            </div>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="w-100 h-100 d-flex">
+        <h4 class="m-auto">Loading ...</h4>
+      </div>
+    }
+  </div>
 </div>

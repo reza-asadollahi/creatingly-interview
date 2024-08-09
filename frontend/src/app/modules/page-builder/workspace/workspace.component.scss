@@ -1,17 +1,26 @@
 .workspace-container {
   background: #f9fafb;
-  width: calc(100vw - 200px);
+  width: calc(100vw - 280px);
   height: calc(100vh - var(--header-height));
   min-height: 400px;
-  padding: 1rem 2rem;
   overflow: auto;
+  position: relative;
+}
+
+.workspace-wrapper {
+  background: #f9fafb;
+  width: fit-content;
+  height: fit-content;
+  min-height: 400px;
+  padding: 1rem 2rem;
+  overflow: visible;
   position: relative;
 }
 
 .main-workspace-area {
   background-color: #fff;
-  min-height: 100%;
-  width: 100%;
+  height: fit-content;
+  min-height: calc(100vh - var(--header-height) - 2rem);
   border-radius: 2px;
   box-shadow: 0 0 5px 3px #0001;
   overflow: hidden;
@@ -24,6 +33,7 @@
   height: 0;
   overflow: visible;
   transition: .1s;
+  z-index: 9999;
 
   .user-cursor {
     width: 10px;

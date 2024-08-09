@@ -4,11 +4,7 @@ import { SharedModule } from "../../../../shared/shared.module";
 
 @Component({
   selector: 'widget-div',
-  template: `<div class="resizable-tag"
-                  (mousedown)="onMouseDown($event)"
-                  (mousemove)="onMouseMove($event)"
-                  (mouseup)="onMouseUp($event)"
-                  (mouseleave)="onMouseLeave($event)"
+  template: `<div class="resizable-tag" #resizableTagRef
                   [ngClass]="generalConfig?.cssClasses"
                   [ngStyle]="generalConfig | mapConfigToStyle : tempConfig">
 

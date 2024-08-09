@@ -10,18 +10,25 @@
   </div>
 </div>
 
-<form class="row p-4 border-top">
-  <div class="col-md-6">
+<h3 class="border-top p-3 pb-0">Create new project</h3>
+<form class="row p-4">
+  <div class="col-md-4">
     <mat-form-field class="w-100">
       <mat-label>Project Name</mat-label>
       <input matInput name="newProjectName" [(ngModel)]="newProjectName" required>
     </mat-form-field>
   </div>
+  <div class="col-md-4">
+    <mat-form-field class="w-100">
+      <mat-label>Page Width (pixel)</mat-label>
+      <input matInput name="newProjectWidth" type="number" [(ngModel)]="newProjectWidth" required>
+    </mat-form-field>
+  </div>
 
   <div class="col-md-4">
     <button type="submit"
-            (click)="createProject(newProjectName)"
-            [disabled]="!newProjectName"
+            (click)="createProject()"
+            [disabled]="!newProjectName || !newProjectWidth"
             class="btn btn-primary">
       Create Project
     </button>

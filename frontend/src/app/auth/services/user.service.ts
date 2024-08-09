@@ -14,7 +14,6 @@ export class UserService {
   constructor(private router: Router,
               private tokenService: AuthTokenService) {
     if (this.tokenService.token) {
-      // console.log(this.tokenService.token)
       this.fetchUserInfo(this.tokenService.token)
     }
   }

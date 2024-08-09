@@ -1,0 +1,51 @@
+<div class="config-form">
+  <form [formGroup]="elementConfigForm">
+    <mat-form-field>
+      <mat-label>Width:</mat-label>
+      <input matInput id="width" formControlName="width" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Height:</mat-label>
+      <input matInput id="height" formControlName="height" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Position:</mat-label>
+      <mat-select id="position" formControlName="position">
+        <mat-option value="absolute">Absolute</mat-option>
+        <mat-option value="relative">Relative</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Z-Index:</mat-label>
+      <input matInput id="zIndex" formControlName="zIndex" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Top:</mat-label>
+      <input matInput id="top" formControlName="top" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Left:</mat-label>
+      <input matInput id="left" formControlName="left" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Right:</mat-label>
+      <input matInput id="right" formControlName="right" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Bottom:</mat-label>
+      <input matInput id="bottom" formControlName="bottom" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Color:</mat-label>
+      <input matInput id="color" formControlName="color" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Background Color:</mat-label>
+      <input matInput id="backgroundColor" formControlName="backgroundColor" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CSS Classes:</mat-label>
+      <input matInput id="cssClasses" formControlName="cssClasses" type="text">
+    </mat-form-field>
+  </form>
+</div>

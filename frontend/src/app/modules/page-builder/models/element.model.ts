@@ -6,10 +6,10 @@ export interface ElementConfigModel {
   height?: string,
   position?: 'absolute' | 'relative',
   zIndex?: number,
-  top?: number
-  left?: number
-  right?: number
-  button?: number
+  top?: string
+  left?: string
+  right?: string
+  button?: string
   color?: string
   backgroundColor?: string
 
@@ -20,10 +20,11 @@ export interface ElementConfigModel {
  * !important, this model fields must match with "BaseElementComponent" inputs (we can create a mapper instead but in this case it is okay) */
 export interface ElementInfoModel {
   id?: string,
+  _tempId?: string,
   elementType: ElementType,
   generalConfig?: ElementConfigModel
   content?: string
   sequence?: number
-  lockedByUser?: string
   extraConfig?: any
+  lockedByUser?: UserModel
 }

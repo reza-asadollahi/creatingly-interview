@@ -111,6 +111,17 @@
             ],
             "scripts": []
           }
+        },
+        "e2e": {
+          "builder": "cypress/cypress:ng",
+          "options": {
+            "devServerTarget": "your-project-name:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "your-project-name:serve:production"
+            }
+          }
         }
       }
     }

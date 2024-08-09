@@ -15,9 +15,7 @@ const io = new Server(server, {
   },
 });
 
-app.use(cors({
-  origin: ["http://localhost:4200"]
-}));
+app.use(cors());
 app.use(express.json());
 app.use('/api/projects', authMiddleware, projectRoutes);
 app.use('/api/users', userRoutes);

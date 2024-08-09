@@ -5,9 +5,9 @@ exports.getProjects = (req, res) => {
 };
 
 exports.createProject = (req, res) => {
-  const { name } = req.body;
+  const { name, styles } = req.body;
   const { userId } = req.user;
-  const project = createProject(name, userId);
+  const project = createProject(name, userId, styles);
   res.status(201).json(project);
 };
 

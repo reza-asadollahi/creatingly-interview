@@ -33,6 +33,7 @@
   height: 0;
   overflow: visible;
   transition: .1s;
+  z-index: 9999;
 
   .user-cursor {
     width: 10px;

@@ -39,7 +39,6 @@ export class PageBuilderService {
 
     // listen to some elements changes in project list
     this.socket.on('projectSomeElementChange', ((elements: ElementInfoModel[]) => {
-      console.log(elements)
       const currentList = [...this._projectElementList$.value || []];
 
       for (let element of elements) {
@@ -56,8 +55,6 @@ export class PageBuilderService {
     // listen to all single element change event
     this.socket.on('projectElementChange', ((element: ElementInfoModel) => {
       const currentList = [...this._projectElementList$.value || []];
-
-      console.log('projectElementChange', element)
 
       let elementIndex = currentList.findIndex(el => el.id === element.id || el._tempId === element._tempId)
       if (elementIndex !== -1)

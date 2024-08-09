@@ -21,6 +21,7 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
   /** this use to store changes temporary until undo changes or save them to the server */
   tempConfig?: ElementConfigModel
   isResizing = false;
+  isMoveAbsoluteElement = false;
   private lastX?: number;
   private lastY?: number;
 
@@ -51,6 +52,19 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
         width: rect.width + 'px',
         height: rect.height + 'px',
       }
+    } else if (this.generalConfig?.position === 'absolute') {
+      event.stopPropagation();
+      event.preventDefault();
+      this.isMoveAbsoluteElement = true;
+      this.lastX = event.clientX;
+      this.lastY = event.clientY;
+
+      const rect: DOMRect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+
+      this.tempConfig = {
+        top: `${Number(this.generalConfig?.top?.slice(0, -2) || rect.top)}px`,
+        left: `${Number(this.generalConfig?.left?.slice(0, -2) || rect.left)}px`
+      };
     }
   }
 
@@ -69,17 +83,39 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
 
       this.lastX = event.clientX;
       this.lastY = event.clientY;
+
+    } else if(this.isMoveAbsoluteElement) {
+      event.stopPropagation();
+      event.preventDefault();
+      const deltaX = event.clientX - (this.lastX || 0);
+      const deltaY = event.clientY - (this.lastY || 0);
+
+      this.tempConfig = {
+        top: `${Number(this.tempConfig?.top?.slice(0, -2)) + deltaY}px`,
+        left: `${Number(this.tempConfig?.left?.slice(0, -2)) + deltaX}px`
+      };
+
+      this.lastX = event.clientX;
+      this.lastY = event.clientY;
     }
   }
 
   onMouseUp(event: MouseEvent): void {
-    this.isResizing = false;
-    this.submitChanges()
+    if (this.isResizing) {
+      this.isResizing = false;
+      this.submitChanges()
+    } else if(this.isMoveAbsoluteElement) {
+      this.isMoveAbsoluteElement = false
+      this.submitChanges()
+    }
   }
 
   onMouseLeave(event: MouseEvent): void {
     if (this.isResizing) {
       this.isResizing = false;
+      this.submitChanges()
+    } else if(this.isMoveAbsoluteElement) {
+      this.isMoveAbsoluteElement = false
       this.submitChanges()
     }
   }

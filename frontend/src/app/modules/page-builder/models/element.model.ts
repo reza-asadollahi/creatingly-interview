@@ -6,10 +6,10 @@ export interface ElementConfigModel {
   height?: string,
   position?: 'absolute' | 'relative',
   zIndex?: number,
-  top?: number
-  left?: number
-  right?: number
-  button?: number
+  top?: string
+  left?: string
+  right?: string
+  button?: string
   color?: string
   backgroundColor?: string
 

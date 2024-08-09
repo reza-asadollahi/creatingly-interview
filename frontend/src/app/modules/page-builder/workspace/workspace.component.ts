@@ -33,13 +33,13 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       }))
   }
 
-  elementTrackByFn(index: number, item:ElementInfoModel) {
+  elementTrackByFn(index: number, item: ElementInfoModel) {
     return item?.id || item?._tempId
   }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
-    const position: [x: number, y: number] =  this.calculateMousePosition(event);
+    const position: [x: number, y: number] = this.calculateMousePosition(event);
     this.pageBuilderService.updateMouseMove(position)
   }
 
@@ -68,7 +68,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   }
 
   onMouseMove(event: MouseEvent) {
-    const position: [x: number, y: number] =  this.calculateMousePosition(event);
+    const position: [x: number, y: number] = this.calculateMousePosition(event);
     this.pageBuilderService.updateMouseMove(position)
   }
 

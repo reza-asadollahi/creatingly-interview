@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npm run start --prefix backend & npm run start --prefix frontend",
     "watch": "npm run watch --prefix backend & npm run start --prefix frontend",
-    "test": "npm run test --prefix backend && npm run test --prefix frontend"
+    "test": "npm run test --prefix backend && npm run test --prefix frontend",
+    "test:e2e": "npm run start --prefix backend & npm run test:e2e --prefix frontend",
+    "test:e2e:open": "npm run start --prefix backend & npm run test:e2e:open --prefix frontend"
   },
   "author": "",
   "license": "ISC"

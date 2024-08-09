@@ -11,6 +11,7 @@ import { Observable } from "rxjs";
 @Component({template: ""})
 export abstract class BaseElementComponent<T = any> implements AfterViewInit {
   @Input() id?: string
+  @Input() _tempId?: string
   @Input() elementType?: ElementType
   @Input() generalConfig?: ElementConfigModel
   @Input() content?: string
@@ -29,7 +30,7 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
 
   ngAfterViewInit() {
     const element = this.resizableTag?.nativeElement;
-    if(element) {
+    if (element) {
       element.addEventListener('mousedown', this.onMouseDown.bind(this));
       element.addEventListener('mousemove', this.onMouseMove.bind(this));
       element.addEventListener('mouseup', this.onMouseUp.bind(this));
@@ -77,8 +78,10 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
   }
 
   onMouseLeave(event: MouseEvent): void {
-    this.isResizing = false;
-    this.submitChanges()
+    if (this.isResizing) {
+      this.isResizing = false;
+      this.submitChanges()
+    }
   }
 
   private isInResizeZone(event: MouseEvent): boolean {
@@ -101,6 +104,6 @@ export abstract class BaseElementComponent<T = any> implements AfterViewInit {
     } else {
       element.generalConfig = {...this.tempConfig}
     }
-    this.pageBuilderService.updateElement(element)
+    this.pageBuilderService.updateElement(element, 'generalConfig')
   }
 }

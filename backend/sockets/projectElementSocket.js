@@ -10,25 +10,29 @@ const {
 function projectElementSocket(io, socket) {
 
   socket.on('addElementToProject', ({ projectId, elementInfo, index }) => {
-    const element = addElementToProject(projectId, elementInfo, index);
-    const listOfAllElementInProject = getAllElementOfProject(projectId)
-    io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
-    // io.to(projectId).emit('projectElementChanges', element);
+    const listOfChangedElementInProject = addElementToProject(projectId, elementInfo, index);
+    console.log('addElementToProject', listOfChangedElementInProject)
+    io.in(projectId).emit('projectSomeElementChange', listOfChangedElementInProject);
   });
 
   socket.on('changeElementSequence', ({ projectId, elementId, newSequence }) => {
-    const listOfAllElementInProject = changeElementSequence(projectId, elementId, newSequence);
-    io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
+    const listOfChangedElementInProject = changeElementSequence(projectId, elementId, newSequence);
+    console.log('changeElementSequence', listOfChangedElementInProject)
+    io.in(projectId).emit('projectSomeElementChange', listOfChangedElementInProject);
   });
 
-  socket.on('updateElement', ({ projectId, elementInfo }) => {
-    const listOfAllElementInProject = updateElementOfProject(projectId, elementInfo);
-    io.to(projectId).emit('projectListElementChanges', listOfAllElementInProject);
+  socket.on('updateElement', ({ projectId, elementInfo, changeField }) => {
+    const updatedElement = updateElementOfProject(projectId, elementInfo, changeField);
+    console.log('updateElement', updatedElement)
+    io.to(projectId).emit('projectElementChange', updatedElement);
   });
 
   socket.on('deleteElementFromProject', ({ projectId, elementId }) => {
-    const listOfAllElementInProject = deleteElementOfProject(projectId, elementId);
-    io.in(projectId).emit('projectListElementChanges', listOfAllElementInProject);
+
+    const updatedElement = deleteElementOfProject(projectId, elementId);
+    io.to(projectId).emit('deleteElementFromProject', elementId);
+    console.log('deleteElementFromProject', updatedElement)
+    io.in(projectId).emit('projectSomeElementChange', updatedElement);
   });
 }
 

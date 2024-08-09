@@ -6,15 +6,15 @@
            (drop)="onDrop($event)"
            (dragover)="onDragOver($event)">
         <app-dynamic-element
-          *ngFor="let component of (projectElements$ | async); let i = index; trackBy: elementTrackByFn"
+          *ngFor="let elm of (projectElements$ | async) | sortBySequence; let i = index; trackBy: elementTrackByFn"
           draggable="true"
-          (dragstart)="onDragStart($event, i, component.id)"
-          (drop)="onDropSort($event, i)"
+          (dragstart)="onDragStart($event, elm.id || elm._tempId)"
+          (drop)="onDropSort($event, elm.sequence)"
           (dragover)="onDragOver($event)"
-          (dblclick)="editElement(component)"
-          [id]="component.id"
-          [elementType]="component.elementType"
-          [elementInfo]="component"></app-dynamic-element>
+          (dblclick)="editElement(elm)"
+          [id]="elm.id"
+          [elementType]="elm.elementType"
+          [elementInfo]="elm"></app-dynamic-element>
       </div>
 
       @if (userActivities$ | async) {

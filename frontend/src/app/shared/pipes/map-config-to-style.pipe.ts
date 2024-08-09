@@ -3,7 +3,7 @@ import { ElementConfigModel } from "../../modules/page-builder/models/element.mo
 
 const IGNORED_CONFIG_KEYS = ['id', 'cssClasses']
 
-@Pipe({name: 'mapConfigToStyle'})
+@Pipe({name: 'mapConfigToStyle', pure: false})
 export class MapConfigToStylePipe implements PipeTransform {
   transform(config?: ElementConfigModel, higherPriorityConfig: Partial<ElementConfigModel> = {}): any {
     if(!config || typeof config !== "object")

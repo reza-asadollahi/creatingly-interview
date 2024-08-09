@@ -34,7 +34,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   }
 
   elementTrackByFn(index: number, item:ElementInfoModel) {
-    return item?.id
+    return item?.id || item?._tempId
   }
 
   onDragOver(event: DragEvent) {
@@ -51,12 +51,11 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDragStart(event: DragEvent, index: number, elementId?: string) {
-    event.dataTransfer?.setData('index', index.toString());
+  onDragStart(event: DragEvent, elementId?: string) {
     event.dataTransfer?.setData('elementId', elementId || '');
   }
 
-  onDropSort(event: DragEvent, newIndex: number) {
+  onDropSort(event: DragEvent, newIndex?: number) {
     event.preventDefault();
     const elementId = event.dataTransfer?.getData('elementId')
     if(elementId) {
